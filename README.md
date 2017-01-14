@@ -6,8 +6,14 @@ helpers to configure the specific components such as databases.
 
 Requirements
 ------------
-This role is typically used within other rules with an `include_role`.  It
-is not designed to run standalone.
+This role is typically used within other roles with an `include_role`.  It
+is not designed to run standalone.  The role currently takes care registers
+a variable called `openstack_oslo_db_config_result` which you should check
+if it's changed to re-run database migrations for example.
+
+This is a limitation because `include_role` changed events are not propagated
+to the parent role, therefore we work around with this until this small
+[Ansible issue](https://github.com/ansible/ansible/issues/18334) is resolved.
 
 
 Role Variables
@@ -22,6 +28,9 @@ The variables that have to be configured inside this role are the following:
 | `openstack_oslo_db_username`     | Database username                      |
 | `openstack_oslo_db_password`     | Database password                      |
 | `openstack_oslo_db_config_files` | List of configuration files to update  |
+
+Once this role runs, it will set `openstack_oslo_db_config_result` which you
+have to check for changes.
 
 
 Dependencies
@@ -44,9 +53,10 @@ Example Usage
         openstack_oslo_db_password: "{{ openstack_keystone_database_password }}"
         openstack_oslo_db_config_files:
           - "{{ __openstack_keystone_config_file }}"
-      notify:
-        - sync keystone database
-        - bootstrap keystone database
+
+    - name: sync keystone database
+      command: "{{ __openstack_keystone_manage_path }} db_sync"
+      when: openstack_oslo_db_config_result.changed
 
 
 License

@@ -1,1 +1,2 @@
 - include: "database/{{ openstack_oslo_db_driver }}.yml"
+- meta: flush_handlers

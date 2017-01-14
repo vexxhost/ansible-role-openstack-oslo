@@ -19,4 +19,5 @@
     option: connection
     value: "mysql+pymysql://{{ openstack_oslo_db_username }}:{{ openstack_oslo_db_password }}@localhost/{{ openstack_oslo_db_name }}"
   with_items: "{{ openstack_oslo_db_config_files }}"
+  register: openstack_oslo_db_config_result
 ...
