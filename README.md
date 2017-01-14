@@ -46,8 +46,8 @@ Example Usage
         name: vexxhost.openstack-oslo
         tasks_from: db
       vars:
-        openstack_oslo_db_manage: "{{ openstack_keystone_manage_database | default(omit) }}"
-        openstack_oslo_db_driver: "{{ openstack_keystone_database_driver | default(omit) }}"
+        openstack_oslo_db_manage: "{{ openstack_keystone_manage_database }}"
+        openstack_oslo_db_driver: "{{ openstack_keystone_database_driver }}"
         openstack_oslo_db_name: "{{ openstack_keystone_database_name }}"
         openstack_oslo_db_username: "{{ openstack_keystone_database_username }}"
         openstack_oslo_db_password: "{{ openstack_keystone_database_password }}"
