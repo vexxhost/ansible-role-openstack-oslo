@@ -14,7 +14,7 @@
 
 - name: configure database
   ini_file:
-    dest: "{{ __openstack_keystone_config_file }}"
+    dest: "{{ item }}"
     section: database
     option: connection
     value: "mysql+pymysql://{{ openstack_oslo_db_username }}:{{ openstack_oslo_db_password }}@localhost/{{ openstack_oslo_db_name }}"
