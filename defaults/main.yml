@@ -1,0 +1,4 @@
+---
+openstack_oslo_db_manage: true
+openstack_oslo_db_driver: mysql
+...

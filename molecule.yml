@@ -1,0 +1,15 @@
+---
+ansible:
+  playbook: tests/test.yml
+dependency:
+  name: galaxy
+driver:
+  name: openstack
+openstack:
+  instances:
+    - name: openstack-oslo
+      image: 'CentOS Linux 7 (Core) [2016-09-23]'
+      flavor: v1-standard-8
+      sshuser: centos
+verifier:
+  name: testinfra
